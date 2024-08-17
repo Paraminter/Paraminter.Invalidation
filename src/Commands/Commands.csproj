@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <AssemblyName>Paraminter.Invalidation.Commands</AssemblyName>
+
+        <RootNamespace>Paraminter.Invalidation.Commands</RootNamespace>
+        
+        <PackageId>Paraminter.Invalidation.Commands</PackageId>
+        <Description>Defines commands for Paraminter invalidators.</Description>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Paraminter.Cqs.Commands" />
+    </ItemGroup>
+
+</Project>
