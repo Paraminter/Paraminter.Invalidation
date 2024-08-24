@@ -35,11 +35,11 @@ public sealed class Handle
 
     private void ReturnsValue(bool expected)
     {
-        Mock<IReadOnlyArgumentAssociationsInvalidity> invalidityMock = new();
+        Mock<IArgumentAssociationsInvalidityStatus> invalidityStatusMock = new();
 
-        invalidityMock.Setup(static (invalidity) => invalidity.HaveBeenInvalidated).Returns(expected);
+        invalidityStatusMock.Setup(static (invalidityStatus) => invalidityStatus.HaveBeenInvalidated).Returns(expected);
 
-        Fixture.InvalidityProviderMock.Setup(static (provider) => provider.Handle(It.IsAny<IGetArgumentAssociationsInvalidityQuery>())).Returns(invalidityMock.Object);
+        Fixture.InvalidityStatusProviderMock.Setup(static (provider) => provider.Handle(It.IsAny<IGetArgumentAssociationsInvalidityStatusQuery>())).Returns(invalidityStatusMock.Object);
 
         var result = Target(Mock.Of<IAreArgumentAssociationsInvalidatedQuery>());
 

@@ -22,15 +22,15 @@ public sealed class Handle
     }
 
     [Fact]
-    public void ValidQuery_ReturnsInvalidity()
+    public void ValidQuery_ReturnsInvalidityStatus()
     {
-        var result = Target(Mock.Of<IGetArgumentAssociationsInvalidityQuery>());
+        var result = Target(Mock.Of<IGetArgumentAssociationsInvalidityStatusQuery>());
 
-        Assert.Same(Fixture.InvalidityMock.Object, result);
+        Assert.Same(Fixture.InvalidityStatusMock.Object, result);
     }
 
-    private IArgumentAssociationsInvalidity Target(
-        IGetArgumentAssociationsInvalidityQuery query)
+    private IArgumentAssociationsInvalidityStatus Target(
+        IGetArgumentAssociationsInvalidityStatusQuery query)
     {
         return Fixture.Sut.Handle(query);
     }

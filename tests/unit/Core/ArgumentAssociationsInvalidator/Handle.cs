@@ -25,13 +25,13 @@ public sealed class Handle
     [Fact]
     public void ValidArguments_InvalidatesModel()
     {
-        Mock<IWriteOnlyArgumentAssociationsInvalidity> invalidityMock = new();
+        Mock<IArgumentAssociationsInvalidator> invalidatorMock = new();
 
-        Fixture.InvalidityProviderMock.Setup(static (handler) => handler.Handle(It.IsAny<IGetArgumentAssociationsInvalidityQuery>())).Returns(invalidityMock.Object);
+        Fixture.InvalidatorProviderMock.Setup(static (handler) => handler.Handle(It.IsAny<IGetArgumentAssociationsInvalidityStatusQuery>())).Returns(invalidatorMock.Object);
 
         Target(Mock.Of<IInvalidateArgumentAssociationsCommand>());
 
-        invalidityMock.Verify(static (invalidity) => invalidity.Invalidate(), Times.Once);
+        invalidatorMock.Verify(static (invalidator) => invalidator.Invalidate(), Times.Once);
     }
 
     private void Target(
