@@ -13,7 +13,7 @@ using Xunit;
 public sealed class Constructor
 {
     [Fact]
-    public void NullInvalidityProvider_ThrowsArgumentNullException()
+    public void NullInvalidatorProvider_ThrowsArgumentNullException()
     {
         var result = Record.Exception(() => Target(null!));
 
@@ -23,14 +23,14 @@ public sealed class Constructor
     [Fact]
     public void ValidArguments_ReturnsInvalidator()
     {
-        var result = Target(Mock.Of<IQueryHandler<IGetArgumentAssociationsInvalidityQuery, IWriteOnlyArgumentAssociationsInvalidity>>());
+        var result = Target(Mock.Of<IQueryHandler<IGetArgumentAssociationsInvalidityStatusQuery, IArgumentAssociationsInvalidator>>());
 
         Assert.NotNull(result);
     }
 
     private static ArgumentAssociationsInvalidator Target(
-        IQueryHandler<IGetArgumentAssociationsInvalidityQuery, IWriteOnlyArgumentAssociationsInvalidity> invalidityProvider)
+        IQueryHandler<IGetArgumentAssociationsInvalidityStatusQuery, IArgumentAssociationsInvalidator> invalidatorProvider)
     {
-        return new ArgumentAssociationsInvalidator(invalidityProvider);
+        return new ArgumentAssociationsInvalidator(invalidatorProvider);
     }
 }

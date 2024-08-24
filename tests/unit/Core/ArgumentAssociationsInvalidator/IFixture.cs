@@ -11,5 +11,5 @@ internal interface IFixture
 {
     public abstract ICommandHandler<IInvalidateArgumentAssociationsCommand> Sut { get; }
 
-    public abstract Mock<IQueryHandler<IGetArgumentAssociationsInvalidityQuery, IWriteOnlyArgumentAssociationsInvalidity>> InvalidityProviderMock { get; }
+    public abstract Mock<IQueryHandler<IGetArgumentAssociationsInvalidityStatusQuery, IArgumentAssociationsInvalidator>> InvalidatorProviderMock { get; }
 }

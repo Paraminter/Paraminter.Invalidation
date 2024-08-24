@@ -1,18 +1,50 @@
 ﻿namespace Paraminter.Invalidation.Models;
 
-/// <inheritdoc cref="IArgumentAssociationsInvalidity"/>
+/// <summary>Handles the invalidity of the made associations between arguments and parameters.</summary>
 public sealed class ArgumentAssociationsInvalidity
     : IArgumentAssociationsInvalidity
 {
-    private bool HaveBeenInvalidated = false;
+    private readonly IArgumentAssociationsInvalidityStatus Status;
+    private readonly IArgumentAssociationsInvalidator Invalidator;
 
-    /// <summary>Instantiates a representation of the invalidity of the made associations between argumetns and parameters, starting in the <see langword="false"/> state.</summary>
-    public ArgumentAssociationsInvalidity() { }
-
-    bool IReadOnlyArgumentAssociationsInvalidity.HaveBeenInvalidated => HaveBeenInvalidated;
-
-    void IWriteOnlyArgumentAssociationsInvalidity.Invalidate()
+    /// <summary>Instantiates a handler of the invalidity of the made associations between arguments and parameters.</summary>
+    public ArgumentAssociationsInvalidity()
     {
-        HaveBeenInvalidated = true;
+        var status = new ArgumentAssociationsInvalidityStatus();
+
+        Status = status;
+        Invalidator = new ArgumentAssociationsInvalidator(status);
+    }
+
+    IArgumentAssociationsInvalidityStatus IArgumentAssociationsInvalidity.Status => Status;
+    IArgumentAssociationsInvalidator IArgumentAssociationsInvalidity.Invalidator => Invalidator;
+
+    private sealed class ArgumentAssociationsInvalidityStatus
+        : IArgumentAssociationsInvalidityStatus
+    {
+        private bool HaveBeenInvalidated = false;
+
+        public ArgumentAssociationsInvalidityStatus() { }
+
+        public void Invalidate()
+        {
+            HaveBeenInvalidated = true;
+        }
+
+        bool IArgumentAssociationsInvalidityStatus.HaveBeenInvalidated => HaveBeenInvalidated;
+    }
+
+    private sealed class ArgumentAssociationsInvalidator
+        : IArgumentAssociationsInvalidator
+    {
+        private readonly ArgumentAssociationsInvalidityStatus Status;
+
+        public ArgumentAssociationsInvalidator(
+            ArgumentAssociationsInvalidityStatus status)
+        {
+            Status = status;
+        }
+
+        void IArgumentAssociationsInvalidator.Invalidate() => Status.Invalidate();
     }
 }

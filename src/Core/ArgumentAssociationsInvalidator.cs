@@ -11,14 +11,14 @@ using System;
 public sealed class ArgumentAssociationsInvalidator
     : ICommandHandler<IInvalidateArgumentAssociationsCommand>
 {
-    private readonly IQueryHandler<IGetArgumentAssociationsInvalidityQuery, IWriteOnlyArgumentAssociationsInvalidity> InvalidityProvider;
+    private readonly IQueryHandler<IGetArgumentAssociationsInvalidityStatusQuery, IArgumentAssociationsInvalidator> InvalidatorProvider;
 
     /// <summary>Instantiates an invalidator of the made asssociations between arguments and parameters.</summary>
-    /// <param name="invalidityProvider">Provides the invalidity of the made associations between arguments and parameters.</param>
+    /// <param name="invalidatorProvider">Provides an invalidator of the made associations between arguments and parameters.</param>
     public ArgumentAssociationsInvalidator(
-        IQueryHandler<IGetArgumentAssociationsInvalidityQuery, IWriteOnlyArgumentAssociationsInvalidity> invalidityProvider)
+        IQueryHandler<IGetArgumentAssociationsInvalidityStatusQuery, IArgumentAssociationsInvalidator> invalidatorProvider)
     {
-        InvalidityProvider = invalidityProvider ?? throw new ArgumentNullException(nameof(invalidityProvider));
+        InvalidatorProvider = invalidatorProvider ?? throw new ArgumentNullException(nameof(invalidatorProvider));
     }
 
     void ICommandHandler<IInvalidateArgumentAssociationsCommand>.Handle(
@@ -29,8 +29,8 @@ public sealed class ArgumentAssociationsInvalidator
             throw new ArgumentNullException(nameof(command));
         }
 
-        var invalidity = InvalidityProvider.Handle(GetArgumentAssociationsInvalidityQuery.Instance);
+        var invalidator = InvalidatorProvider.Handle(GetArgumentAssociationsInvalidityStatusQuery.Instance);
 
-        invalidity.Invalidate();
+        invalidator.Invalidate();
     }
 }

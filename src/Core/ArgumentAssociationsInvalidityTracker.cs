@@ -10,14 +10,14 @@ using System;
 public sealed class ArgumentAssociationsInvalidityTracker
     : IQueryHandler<IAreArgumentAssociationsInvalidatedQuery, bool>
 {
-    private readonly IQueryHandler<IGetArgumentAssociationsInvalidityQuery, IReadOnlyArgumentAssociationsInvalidity> InvalidityProvider;
+    private readonly IQueryHandler<IGetArgumentAssociationsInvalidityStatusQuery, IArgumentAssociationsInvalidityStatus> InvalidityStatusProvider;
 
     /// <summary>Instantiates a tracker of the invalidity of the made associations between arguments and parameters.</summary>
-    /// <param name="invalidityProvider">Provides the invalidity of the made associations between arguments and parameters.</param>
+    /// <param name="invalidityStatusProvider">Provides a representation of the invalidity of the made associations between arguments and parameters.</param>
     public ArgumentAssociationsInvalidityTracker(
-        IQueryHandler<IGetArgumentAssociationsInvalidityQuery, IReadOnlyArgumentAssociationsInvalidity> invalidityProvider)
+        IQueryHandler<IGetArgumentAssociationsInvalidityStatusQuery, IArgumentAssociationsInvalidityStatus> invalidityStatusProvider)
     {
-        InvalidityProvider = invalidityProvider ?? throw new ArgumentNullException(nameof(invalidityProvider));
+        InvalidityStatusProvider = invalidityStatusProvider ?? throw new ArgumentNullException(nameof(invalidityStatusProvider));
     }
 
     bool IQueryHandler<IAreArgumentAssociationsInvalidatedQuery, bool>.Handle(
@@ -28,8 +28,8 @@ public sealed class ArgumentAssociationsInvalidityTracker
             throw new ArgumentNullException(nameof(query));
         }
 
-        var invalidity = InvalidityProvider.Handle(GetArgumentAssociationsInvalidityQuery.Instance);
+        var invalidityStatus = InvalidityStatusProvider.Handle(GetArgumentAssociationsInvalidityStatusQuery.Instance);
 
-        return invalidity.HaveBeenInvalidated;
+        return invalidityStatus.HaveBeenInvalidated;
     }
 }

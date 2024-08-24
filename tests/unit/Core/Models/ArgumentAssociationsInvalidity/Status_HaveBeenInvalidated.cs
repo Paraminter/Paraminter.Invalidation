@@ -2,7 +2,7 @@
 
 using Xunit;
 
-public sealed class HaveBeenInvalidated
+public sealed class Status_HaveBeenInvalidated
 {
     private readonly IFixture Fixture = FixtureFactory.Create();
 
@@ -17,12 +17,12 @@ public sealed class HaveBeenInvalidated
     [Fact]
     public void Invalidated_ReturnsTrue()
     {
-        Fixture.Sut.Invalidate();
+        Fixture.Sut.Invalidator.Invalidate();
 
         var result = Target();
 
         Assert.True(result);
     }
 
-    private bool Target() => Fixture.Sut.HaveBeenInvalidated;
+    private bool Target() => Fixture.Sut.Status.HaveBeenInvalidated;
 }

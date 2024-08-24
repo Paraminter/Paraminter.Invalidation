@@ -11,7 +11,7 @@ using Xunit;
 public sealed class Constructor
 {
     [Fact]
-    public void NullInvalidity_ThrowsArgumentNullException()
+    public void NullInvalidator_ThrowsArgumentNullException()
     {
         var result = Record.Exception(() => Target(null!));
 
@@ -21,14 +21,14 @@ public sealed class Constructor
     [Fact]
     public void ValidArguments_ReturnsProvider()
     {
-        var result = Target(Mock.Of<IArgumentAssociationsInvalidity>());
+        var result = Target(Mock.Of<IArgumentAssociationsInvalidator>());
 
         Assert.NotNull(result);
     }
 
-    private static ArgumentAssociationsInvalidityProvider Target(
-        IArgumentAssociationsInvalidity invalidity)
+    private static ArgumentAssociationsInvalidatorProvider Target(
+        IArgumentAssociationsInvalidator invalidator)
     {
-        return new ArgumentAssociationsInvalidityProvider(invalidity);
+        return new ArgumentAssociationsInvalidatorProvider(invalidator);
     }
 }

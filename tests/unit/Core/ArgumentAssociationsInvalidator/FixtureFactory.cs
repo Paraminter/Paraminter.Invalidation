@@ -11,11 +11,11 @@ internal static class FixtureFactory
 {
     public static IFixture Create()
     {
-        Mock<IQueryHandler<IGetArgumentAssociationsInvalidityQuery, IWriteOnlyArgumentAssociationsInvalidity>> invalidityProviderMock = new();
+        Mock<IQueryHandler<IGetArgumentAssociationsInvalidityStatusQuery, IArgumentAssociationsInvalidator>> invalidatorProviderMock = new();
 
-        var sut = new ArgumentAssociationsInvalidator(invalidityProviderMock.Object);
+        var sut = new ArgumentAssociationsInvalidator(invalidatorProviderMock.Object);
 
-        return new Fixture(sut, invalidityProviderMock);
+        return new Fixture(sut, invalidatorProviderMock);
     }
 
     private sealed class Fixture
@@ -23,19 +23,19 @@ internal static class FixtureFactory
     {
         private readonly ICommandHandler<IInvalidateArgumentAssociationsCommand> Sut;
 
-        private readonly Mock<IQueryHandler<IGetArgumentAssociationsInvalidityQuery, IWriteOnlyArgumentAssociationsInvalidity>> InvalidityProviderMock;
+        private readonly Mock<IQueryHandler<IGetArgumentAssociationsInvalidityStatusQuery, IArgumentAssociationsInvalidator>> InvalidatorProviderMock;
 
         public Fixture(
             ICommandHandler<IInvalidateArgumentAssociationsCommand> sut,
-            Mock<IQueryHandler<IGetArgumentAssociationsInvalidityQuery, IWriteOnlyArgumentAssociationsInvalidity>> invalidityProviderMock)
+            Mock<IQueryHandler<IGetArgumentAssociationsInvalidityStatusQuery, IArgumentAssociationsInvalidator>> invalidatorProviderMock)
         {
             Sut = sut;
 
-            InvalidityProviderMock = invalidityProviderMock;
+            InvalidatorProviderMock = invalidatorProviderMock;
         }
 
         ICommandHandler<IInvalidateArgumentAssociationsCommand> IFixture.Sut => Sut;
 
-        Mock<IQueryHandler<IGetArgumentAssociationsInvalidityQuery, IWriteOnlyArgumentAssociationsInvalidity>> IFixture.InvalidityProviderMock => InvalidityProviderMock;
+        Mock<IQueryHandler<IGetArgumentAssociationsInvalidityStatusQuery, IArgumentAssociationsInvalidator>> IFixture.InvalidatorProviderMock => InvalidatorProviderMock;
     }
 }
