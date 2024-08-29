@@ -10,11 +10,11 @@ internal static class FixtureFactory
 {
     public static IFixture Create()
     {
-        Mock<IArgumentAssociationsInvalidityStatus> invalidityStatusMock = new();
+        Mock<IQueryHandler<IGetArgumentAssociationsInvalidityQuery, IArgumentAssociationsInvalidity>> invalidityProviderMock = new();
 
-        var sut = new ArgumentAssociationsInvalidityStatusProvider(invalidityStatusMock.Object);
+        var sut = new ArgumentAssociationsInvalidityStatusProvider(invalidityProviderMock.Object);
 
-        return new Fixture(sut, invalidityStatusMock);
+        return new Fixture(sut, invalidityProviderMock);
     }
 
     private sealed class Fixture
@@ -22,19 +22,19 @@ internal static class FixtureFactory
     {
         private readonly IQueryHandler<IGetArgumentAssociationsInvalidityStatusQuery, IArgumentAssociationsInvalidityStatus> Sut;
 
-        private readonly Mock<IArgumentAssociationsInvalidityStatus> InvalidityStatusMock;
+        private readonly Mock<IQueryHandler<IGetArgumentAssociationsInvalidityQuery, IArgumentAssociationsInvalidity>> InvalidityProviderMock;
 
         public Fixture(
             IQueryHandler<IGetArgumentAssociationsInvalidityStatusQuery, IArgumentAssociationsInvalidityStatus> sut,
-            Mock<IArgumentAssociationsInvalidityStatus> invalidityStatusMock)
+            Mock<IQueryHandler<IGetArgumentAssociationsInvalidityQuery, IArgumentAssociationsInvalidity>> invalidityProviderMock)
         {
             Sut = sut;
 
-            InvalidityStatusMock = invalidityStatusMock;
+            InvalidityProviderMock = invalidityProviderMock;
         }
 
         IQueryHandler<IGetArgumentAssociationsInvalidityStatusQuery, IArgumentAssociationsInvalidityStatus> IFixture.Sut => Sut;
 
-        Mock<IArgumentAssociationsInvalidityStatus> IFixture.InvalidityStatusMock => InvalidityStatusMock;
+        Mock<IQueryHandler<IGetArgumentAssociationsInvalidityQuery, IArgumentAssociationsInvalidity>> IFixture.InvalidityProviderMock => InvalidityProviderMock;
     }
 }

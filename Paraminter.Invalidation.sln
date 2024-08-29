@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgumentAssociationsInvalid
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgumentAssociationsInvalidatorProvider", "tests\unit\Core\ArgumentAssociationsInvalidatorProvider\ArgumentAssociationsInvalidatorProvider.csproj", "{AEECA3B3-6CA9-43B0-891E-076E23A8D17F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgumentAssociationsInvalidityProvider", "tests\unit\Core\ArgumentAssociationsInvalidityProvider\ArgumentAssociationsInvalidityProvider.csproj", "{8CF1B52F-8961-4B2F-BF6C-38ADADA80052}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{AEECA3B3-6CA9-43B0-891E-076E23A8D17F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEECA3B3-6CA9-43B0-891E-076E23A8D17F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEECA3B3-6CA9-43B0-891E-076E23A8D17F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CF1B52F-8961-4B2F-BF6C-38ADADA80052}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CF1B52F-8961-4B2F-BF6C-38ADADA80052}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CF1B52F-8961-4B2F-BF6C-38ADADA80052}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CF1B52F-8961-4B2F-BF6C-38ADADA80052}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,6 +99,7 @@ Global
 		{48501191-9E89-4881-A00E-72432B67A794} = {71FD17E7-CF94-4B67-B59F-E27DF9BF99C9}
 		{AE918923-BA29-4A73-AA1C-62AF7968CC8B} = {AAC71100-8FB1-4849-9EA4-D36291C10869}
 		{AEECA3B3-6CA9-43B0-891E-076E23A8D17F} = {AAC71100-8FB1-4849-9EA4-D36291C10869}
+		{8CF1B52F-8961-4B2F-BF6C-38ADADA80052} = {AAC71100-8FB1-4849-9EA4-D36291C10869}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A8BF900F-8E8F-47C1-A16F-1AE237548BDF}

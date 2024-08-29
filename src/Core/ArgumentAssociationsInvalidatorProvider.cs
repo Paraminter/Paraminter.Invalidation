@@ -10,14 +10,14 @@ using System;
 public sealed class ArgumentAssociationsInvalidatorProvider
     : IQueryHandler<IGetArgumentAssociationsInvalidatorQuery, IArgumentAssociationsInvalidator>
 {
-    private readonly IArgumentAssociationsInvalidator Invalidator;
+    private readonly IQueryHandler<IGetArgumentAssociationsInvalidityQuery, IArgumentAssociationsInvalidity> InvalidityProvider;
 
     /// <summary>Instantiates a provider of an invalidator of the made associations between arguments and parameters.</summary>
-    /// <param name="invalidator">The invalidator of the made associations between arguments and parameters.</param>
+    /// <param name="invalidityProvider">Provides the invalidity of the made associations between arguments and parameters.</param>
     public ArgumentAssociationsInvalidatorProvider(
-        IArgumentAssociationsInvalidator invalidator)
+        IQueryHandler<IGetArgumentAssociationsInvalidityQuery, IArgumentAssociationsInvalidity> invalidityProvider)
     {
-        Invalidator = invalidator ?? throw new ArgumentNullException(nameof(invalidator));
+        InvalidityProvider = invalidityProvider ?? throw new ArgumentNullException(nameof(invalidityProvider));
     }
 
     IArgumentAssociationsInvalidator IQueryHandler<IGetArgumentAssociationsInvalidatorQuery, IArgumentAssociationsInvalidator>.Handle(
@@ -28,6 +28,6 @@ public sealed class ArgumentAssociationsInvalidatorProvider
             throw new ArgumentNullException(nameof(query));
         }
 
-        return Invalidator;
+        return InvalidityProvider.Handle(GetArgumentAssociationsInvalidityQuery.Instance).Invalidator;
     }
 }
