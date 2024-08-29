@@ -11,12 +11,12 @@ using System;
 public sealed class ArgumentAssociationsInvalidator
     : ICommandHandler<IInvalidateArgumentAssociationsCommand>
 {
-    private readonly IQueryHandler<IGetArgumentAssociationsInvalidityStatusQuery, IArgumentAssociationsInvalidator> InvalidatorProvider;
+    private readonly IQueryHandler<IGetArgumentAssociationsInvalidatorQuery, IArgumentAssociationsInvalidator> InvalidatorProvider;
 
     /// <summary>Instantiates an invalidator of the made asssociations between arguments and parameters.</summary>
     /// <param name="invalidatorProvider">Provides an invalidator of the made associations between arguments and parameters.</param>
     public ArgumentAssociationsInvalidator(
-        IQueryHandler<IGetArgumentAssociationsInvalidityStatusQuery, IArgumentAssociationsInvalidator> invalidatorProvider)
+        IQueryHandler<IGetArgumentAssociationsInvalidatorQuery, IArgumentAssociationsInvalidator> invalidatorProvider)
     {
         InvalidatorProvider = invalidatorProvider ?? throw new ArgumentNullException(nameof(invalidatorProvider));
     }
@@ -29,7 +29,7 @@ public sealed class ArgumentAssociationsInvalidator
             throw new ArgumentNullException(nameof(command));
         }
 
-        var invalidator = InvalidatorProvider.Handle(GetArgumentAssociationsInvalidityStatusQuery.Instance);
+        var invalidator = InvalidatorProvider.Handle(GetArgumentAssociationsInvalidatorQuery.Instance);
 
         invalidator.Invalidate();
     }

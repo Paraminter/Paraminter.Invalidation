@@ -27,7 +27,7 @@ public sealed class Handle
     {
         Mock<IArgumentAssociationsInvalidator> invalidatorMock = new();
 
-        Fixture.InvalidatorProviderMock.Setup(static (handler) => handler.Handle(It.IsAny<IGetArgumentAssociationsInvalidityStatusQuery>())).Returns(invalidatorMock.Object);
+        Fixture.InvalidatorProviderMock.Setup(static (handler) => handler.Handle(It.IsAny<IGetArgumentAssociationsInvalidatorQuery>())).Returns(invalidatorMock.Object);
 
         Target(Mock.Of<IInvalidateArgumentAssociationsCommand>());
 

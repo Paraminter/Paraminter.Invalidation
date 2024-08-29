@@ -10,11 +10,11 @@ internal static class FixtureFactory
 {
     public static IFixture Create()
     {
-        Mock<IArgumentAssociationsInvalidator> invalidatorMock = new();
+        Mock<IQueryHandler<IGetArgumentAssociationsInvalidityQuery, IArgumentAssociationsInvalidity>> invalidityProviderMock = new();
 
-        var sut = new ArgumentAssociationsInvalidatorProvider(invalidatorMock.Object);
+        var sut = new ArgumentAssociationsInvalidatorProvider(invalidityProviderMock.Object);
 
-        return new Fixture(sut, invalidatorMock);
+        return new Fixture(sut, invalidityProviderMock);
     }
 
     private sealed class Fixture
@@ -22,19 +22,19 @@ internal static class FixtureFactory
     {
         private readonly IQueryHandler<IGetArgumentAssociationsInvalidatorQuery, IArgumentAssociationsInvalidator> Sut;
 
-        private readonly Mock<IArgumentAssociationsInvalidator> InvalidatorMock;
+        private readonly Mock<IQueryHandler<IGetArgumentAssociationsInvalidityQuery, IArgumentAssociationsInvalidity>> InvalidityProviderMock;
 
         public Fixture(
             IQueryHandler<IGetArgumentAssociationsInvalidatorQuery, IArgumentAssociationsInvalidator> sut,
-            Mock<IArgumentAssociationsInvalidator> invalidatorMock)
+            Mock<IQueryHandler<IGetArgumentAssociationsInvalidityQuery, IArgumentAssociationsInvalidity>> invalidityProviderMock)
         {
             Sut = sut;
 
-            InvalidatorMock = invalidatorMock;
+            InvalidityProviderMock = invalidityProviderMock;
         }
 
         IQueryHandler<IGetArgumentAssociationsInvalidatorQuery, IArgumentAssociationsInvalidator> IFixture.Sut => Sut;
 
-        Mock<IArgumentAssociationsInvalidator> IFixture.InvalidatorMock => InvalidatorMock;
+        Mock<IQueryHandler<IGetArgumentAssociationsInvalidityQuery, IArgumentAssociationsInvalidity>> IFixture.InvalidityProviderMock => InvalidityProviderMock;
     }
 }

@@ -2,7 +2,9 @@
 
 using Moq;
 
+using Paraminter.Cqs.Handlers;
 using Paraminter.Invalidation.Models;
+using Paraminter.Invalidation.Queries;
 
 using System;
 
@@ -11,7 +13,7 @@ using Xunit;
 public sealed class Constructor
 {
     [Fact]
-    public void NullInvalidator_ThrowsArgumentNullException()
+    public void NullInvalidityProvider_ThrowsArgumentNullException()
     {
         var result = Record.Exception(() => Target(null!));
 
@@ -21,14 +23,14 @@ public sealed class Constructor
     [Fact]
     public void ValidArguments_ReturnsProvider()
     {
-        var result = Target(Mock.Of<IArgumentAssociationsInvalidator>());
+        var result = Target(Mock.Of<IQueryHandler<IGetArgumentAssociationsInvalidityQuery, IArgumentAssociationsInvalidity>>());
 
         Assert.NotNull(result);
     }
 
     private static ArgumentAssociationsInvalidatorProvider Target(
-        IArgumentAssociationsInvalidator invalidator)
+        IQueryHandler<IGetArgumentAssociationsInvalidityQuery, IArgumentAssociationsInvalidity> invalidityProvider)
     {
-        return new ArgumentAssociationsInvalidatorProvider(invalidator);
+        return new ArgumentAssociationsInvalidatorProvider(invalidityProvider);
     }
 }

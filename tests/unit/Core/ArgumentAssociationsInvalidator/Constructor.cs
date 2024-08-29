@@ -23,13 +23,13 @@ public sealed class Constructor
     [Fact]
     public void ValidArguments_ReturnsInvalidator()
     {
-        var result = Target(Mock.Of<IQueryHandler<IGetArgumentAssociationsInvalidityStatusQuery, IArgumentAssociationsInvalidator>>());
+        var result = Target(Mock.Of<IQueryHandler<IGetArgumentAssociationsInvalidatorQuery, IArgumentAssociationsInvalidator>>());
 
         Assert.NotNull(result);
     }
 
     private static ArgumentAssociationsInvalidator Target(
-        IQueryHandler<IGetArgumentAssociationsInvalidityStatusQuery, IArgumentAssociationsInvalidator> invalidatorProvider)
+        IQueryHandler<IGetArgumentAssociationsInvalidatorQuery, IArgumentAssociationsInvalidator> invalidatorProvider)
     {
         return new ArgumentAssociationsInvalidator(invalidatorProvider);
     }

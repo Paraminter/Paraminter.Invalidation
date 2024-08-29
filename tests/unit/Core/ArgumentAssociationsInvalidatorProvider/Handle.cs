@@ -24,9 +24,17 @@ public sealed class Handle
     [Fact]
     public void ValidQuery_ReturnsInvalidator()
     {
+        var invalidator = Mock.Of<IArgumentAssociationsInvalidator>();
+
+        Mock<IArgumentAssociationsInvalidity> invalidityMock = new();
+
+        invalidityMock.Setup(static (invalidity) => invalidity.Invalidator).Returns(invalidator);
+
+        Fixture.InvalidityProviderMock.Setup(static (provider) => provider.Handle(It.IsAny<IGetArgumentAssociationsInvalidityQuery>())).Returns(invalidityMock.Object);
+
         var result = Target(Mock.Of<IGetArgumentAssociationsInvalidatorQuery>());
 
-        Assert.Same(Fixture.InvalidatorMock.Object, result);
+        Assert.Same(invalidator, result);
     }
 
     private IArgumentAssociationsInvalidator Target(
