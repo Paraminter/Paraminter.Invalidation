@@ -1,0 +1,15 @@
+﻿namespace Paraminter.Invalidation;
+
+using Moq;
+
+using Paraminter.Cqs;
+using Paraminter.Cqs.Handlers;
+using Paraminter.Invalidation.Commands;
+
+internal interface IFixture<in TCommand>
+    where TCommand : ICommand
+{
+    public abstract ICommandHandler<TCommand> Sut { get; }
+
+    public abstract Mock<ICommandHandler<IResetArgumentAssociationsInvalidityCommand>> InvalidityResetterMock { get; }
+}
