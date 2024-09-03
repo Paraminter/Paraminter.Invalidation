@@ -2,20 +2,19 @@
 
 using Moq;
 
+using Paraminter.BinaryState.Commands;
 using Paraminter.Cqs.Handlers;
 using Paraminter.Invalidation.Commands;
-using Paraminter.Invalidation.Models;
-using Paraminter.Invalidation.Queries;
 
 internal static class FixtureFactory
 {
     public static IFixture Create()
     {
-        Mock<IQueryHandler<IGetArgumentAssociationsInvalidityResetterQuery, IArgumentAssociationsInvalidityResetter>> invalidityResetterProviderMock = new();
+        Mock<ICommandHandler<IResetBinaryStateCommand>> stateResetterMock = new();
 
-        var sut = new ArgumentAssociationsInvalidityResetter(invalidityResetterProviderMock.Object);
+        var sut = new ArgumentAssociationsInvalidityResetter(stateResetterMock.Object);
 
-        return new Fixture(sut, invalidityResetterProviderMock);
+        return new Fixture(sut, stateResetterMock);
     }
 
     private sealed class Fixture
@@ -23,19 +22,19 @@ internal static class FixtureFactory
     {
         private readonly ICommandHandler<IResetArgumentAssociationsInvalidityCommand> Sut;
 
-        private readonly Mock<IQueryHandler<IGetArgumentAssociationsInvalidityResetterQuery, IArgumentAssociationsInvalidityResetter>> InvalidityResetterProviderMock;
+        private readonly Mock<ICommandHandler<IResetBinaryStateCommand>> StateResetterMock;
 
         public Fixture(
             ICommandHandler<IResetArgumentAssociationsInvalidityCommand> sut,
-            Mock<IQueryHandler<IGetArgumentAssociationsInvalidityResetterQuery, IArgumentAssociationsInvalidityResetter>> invalidityResetterProviderMock)
+            Mock<ICommandHandler<IResetBinaryStateCommand>> stateResetterMock)
         {
             Sut = sut;
 
-            InvalidityResetterProviderMock = invalidityResetterProviderMock;
+            StateResetterMock = stateResetterMock;
         }
 
         ICommandHandler<IResetArgumentAssociationsInvalidityCommand> IFixture.Sut => Sut;
 
-        Mock<IQueryHandler<IGetArgumentAssociationsInvalidityResetterQuery, IArgumentAssociationsInvalidityResetter>> IFixture.InvalidityResetterProviderMock => InvalidityResetterProviderMock;
+        Mock<ICommandHandler<IResetBinaryStateCommand>> IFixture.StateResetterMock => StateResetterMock;
     }
 }

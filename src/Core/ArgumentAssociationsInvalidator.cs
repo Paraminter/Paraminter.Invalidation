@@ -1,9 +1,8 @@
 ﻿namespace Paraminter.Invalidation;
 
+using Paraminter.BinaryState.Commands;
 using Paraminter.Cqs.Handlers;
 using Paraminter.Invalidation.Commands;
-using Paraminter.Invalidation.Models;
-using Paraminter.Invalidation.Queries;
 
 using System;
 
@@ -11,14 +10,14 @@ using System;
 public sealed class ArgumentAssociationsInvalidator
     : ICommandHandler<IInvalidateArgumentAssociationsCommand>
 {
-    private readonly IQueryHandler<IGetArgumentAssociationsInvalidatorQuery, IArgumentAssociationsInvalidator> InvalidatorProvider;
+    private readonly ICommandHandler<ISetBinaryStateCommand> StateSetter;
 
     /// <summary>Instantiates an invalidator of the made asssociations between arguments and parameters.</summary>
-    /// <param name="invalidatorProvider">Provides an invalidator of the made associations between arguments and parameters.</param>
+    /// <param name="stateSetter">Sets the state representing the invalidity of the made associations between arguments and parameters.</param>
     public ArgumentAssociationsInvalidator(
-        IQueryHandler<IGetArgumentAssociationsInvalidatorQuery, IArgumentAssociationsInvalidator> invalidatorProvider)
+        ICommandHandler<ISetBinaryStateCommand> stateSetter)
     {
-        InvalidatorProvider = invalidatorProvider ?? throw new ArgumentNullException(nameof(invalidatorProvider));
+        StateSetter = stateSetter ?? throw new ArgumentNullException(nameof(stateSetter));
     }
 
     void ICommandHandler<IInvalidateArgumentAssociationsCommand>.Handle(
@@ -29,8 +28,6 @@ public sealed class ArgumentAssociationsInvalidator
             throw new ArgumentNullException(nameof(command));
         }
 
-        var invalidator = InvalidatorProvider.Handle(GetArgumentAssociationsInvalidatorQuery.Instance);
-
-        invalidator.Invalidate();
+        StateSetter.Handle(SetBinaryStateCommand.Instance);
     }
 }
