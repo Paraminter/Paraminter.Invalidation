@@ -2,20 +2,19 @@
 
 using Moq;
 
+using Paraminter.BinaryState.Commands;
 using Paraminter.Cqs.Handlers;
 using Paraminter.Invalidation.Commands;
-using Paraminter.Invalidation.Models;
-using Paraminter.Invalidation.Queries;
 
 internal static class FixtureFactory
 {
     public static IFixture Create()
     {
-        Mock<IQueryHandler<IGetArgumentAssociationsInvalidatorQuery, IArgumentAssociationsInvalidator>> invalidatorProviderMock = new();
+        Mock<ICommandHandler<ISetBinaryStateCommand>> stateSetterMock = new();
 
-        var sut = new ArgumentAssociationsInvalidator(invalidatorProviderMock.Object);
+        var sut = new ArgumentAssociationsInvalidator(stateSetterMock.Object);
 
-        return new Fixture(sut, invalidatorProviderMock);
+        return new Fixture(sut, stateSetterMock);
     }
 
     private sealed class Fixture
@@ -23,19 +22,19 @@ internal static class FixtureFactory
     {
         private readonly ICommandHandler<IInvalidateArgumentAssociationsCommand> Sut;
 
-        private readonly Mock<IQueryHandler<IGetArgumentAssociationsInvalidatorQuery, IArgumentAssociationsInvalidator>> InvalidatorProviderMock;
+        private readonly Mock<ICommandHandler<ISetBinaryStateCommand>> StateSetterMock;
 
         public Fixture(
             ICommandHandler<IInvalidateArgumentAssociationsCommand> sut,
-            Mock<IQueryHandler<IGetArgumentAssociationsInvalidatorQuery, IArgumentAssociationsInvalidator>> invalidatorProviderMock)
+            Mock<ICommandHandler<ISetBinaryStateCommand>> stateSetterMock)
         {
             Sut = sut;
 
-            InvalidatorProviderMock = invalidatorProviderMock;
+            StateSetterMock = stateSetterMock;
         }
 
         ICommandHandler<IInvalidateArgumentAssociationsCommand> IFixture.Sut => Sut;
 
-        Mock<IQueryHandler<IGetArgumentAssociationsInvalidatorQuery, IArgumentAssociationsInvalidator>> IFixture.InvalidatorProviderMock => InvalidatorProviderMock;
+        Mock<ICommandHandler<ISetBinaryStateCommand>> IFixture.StateSetterMock => StateSetterMock;
     }
 }

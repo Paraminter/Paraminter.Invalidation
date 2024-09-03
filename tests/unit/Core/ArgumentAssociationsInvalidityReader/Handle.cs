@@ -2,7 +2,7 @@
 
 using Moq;
 
-using Paraminter.Invalidation.Models;
+using Paraminter.BinaryState.Queries;
 using Paraminter.Invalidation.Queries;
 
 using System;
@@ -22,10 +22,10 @@ public sealed class Handle
     }
 
     [Fact]
-    public void Invalidated_ReturnsTrue() => ReturnsValue(true);
+    public void StateSet_ReturnsTrue() => ReturnsValue(true);
 
     [Fact]
-    public void NotInvalidated_ReturnsFalse() => ReturnsValue(false);
+    public void StateNotSet_ReturnsFalse() => ReturnsValue(false);
 
     private bool Target(
         IAreArgumentAssociationsInvalidatedQuery query)
@@ -35,11 +35,7 @@ public sealed class Handle
 
     private void ReturnsValue(bool expected)
     {
-        Mock<IArgumentAssociationsInvalidityStatus> invalidityStatusMock = new();
-
-        invalidityStatusMock.Setup(static (invalidityStatus) => invalidityStatus.HaveBeenInvalidated).Returns(expected);
-
-        Fixture.InvalidityStatusProviderMock.Setup(static (provider) => provider.Handle(It.IsAny<IGetArgumentAssociationsInvalidityStatusQuery>())).Returns(invalidityStatusMock.Object);
+        Fixture.StateReaderMock.Setup(static (handler) => handler.Handle(It.IsAny<IIsBinaryStateSetQuery>())).Returns(expected);
 
         var result = Target(Mock.Of<IAreArgumentAssociationsInvalidatedQuery>());
 

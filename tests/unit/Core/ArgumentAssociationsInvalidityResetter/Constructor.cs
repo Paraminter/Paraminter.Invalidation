@@ -2,9 +2,8 @@
 
 using Moq;
 
+using Paraminter.BinaryState.Commands;
 using Paraminter.Cqs.Handlers;
-using Paraminter.Invalidation.Models;
-using Paraminter.Invalidation.Queries;
 
 using System;
 
@@ -13,7 +12,7 @@ using Xunit;
 public sealed class Constructor
 {
     [Fact]
-    public void NullInvalidityResetterProvider_ThrowsArgumentNullException()
+    public void NullStateResetter_ThrowsArgumentNullException()
     {
         var result = Record.Exception(() => Target(null!));
 
@@ -23,14 +22,14 @@ public sealed class Constructor
     [Fact]
     public void ValidArguments_ReturnsInvalidator()
     {
-        var result = Target(Mock.Of<IQueryHandler<IGetArgumentAssociationsInvalidityResetterQuery, IArgumentAssociationsInvalidityResetter>>());
+        var result = Target(Mock.Of<ICommandHandler<IResetBinaryStateCommand>>());
 
         Assert.NotNull(result);
     }
 
     private static ArgumentAssociationsInvalidityResetter Target(
-        IQueryHandler<IGetArgumentAssociationsInvalidityResetterQuery, IArgumentAssociationsInvalidityResetter> invalidityResetterProvider)
+        ICommandHandler<IResetBinaryStateCommand> stateResetter)
     {
-        return new ArgumentAssociationsInvalidityResetter(invalidityResetterProvider);
+        return new ArgumentAssociationsInvalidityResetter(stateResetter);
     }
 }

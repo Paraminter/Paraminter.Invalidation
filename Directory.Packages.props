@@ -9,6 +9,8 @@
 
         <PackageVersion Include="Moq" Version="4.20.70" />
 
+        <PackageVersion Include="Paraminter.BinaryState.Commands" Version="8.0.0-alpha.2" />
+        <PackageVersion Include="Paraminter.BinaryState.Queries" Version="8.0.0-alpha.2" />
         <PackageVersion Include="Paraminter.Cqs.Commands" Version="8.0.0-alpha.24" />
         <PackageVersion Include="Paraminter.Cqs.Commands.Handlers" Version="8.0.0-alpha.24" />
         <PackageVersion Include="Paraminter.Cqs.Queries" Version="8.0.0-alpha.36" />

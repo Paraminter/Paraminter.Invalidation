@@ -2,9 +2,8 @@
 
 using Moq;
 
+using Paraminter.BinaryState.Commands;
 using Paraminter.Invalidation.Commands;
-using Paraminter.Invalidation.Models;
-using Paraminter.Invalidation.Queries;
 
 using System;
 
@@ -23,15 +22,11 @@ public sealed class Handle
     }
 
     [Fact]
-    public void ValidArguments_InvalidatesModel()
+    public void ValidArguments_ResetsBinaryState()
     {
-        Mock<IArgumentAssociationsInvalidityResetter> invalidityResetterMock = new();
-
-        Fixture.InvalidityResetterProviderMock.Setup(static (handler) => handler.Handle(It.IsAny<IGetArgumentAssociationsInvalidityResetterQuery>())).Returns(invalidityResetterMock.Object);
-
         Target(Mock.Of<IResetArgumentAssociationsInvalidityCommand>());
 
-        invalidityResetterMock.Verify(static (resetter) => resetter.Reset(), Times.Once);
+        Fixture.StateResetterMock.Verify(static (handler) => handler.Handle(It.IsAny<IResetBinaryStateCommand>()), Times.Once());
     }
 
     private void Target(

@@ -2,9 +2,8 @@
 
 using Moq;
 
+using Paraminter.BinaryState.Commands;
 using Paraminter.Invalidation.Commands;
-using Paraminter.Invalidation.Models;
-using Paraminter.Invalidation.Queries;
 
 using System;
 
@@ -23,15 +22,11 @@ public sealed class Handle
     }
 
     [Fact]
-    public void ValidArguments_InvalidatesModel()
+    public void ValidArguments_SetsBinaryState()
     {
-        Mock<IArgumentAssociationsInvalidator> invalidatorMock = new();
-
-        Fixture.InvalidatorProviderMock.Setup(static (handler) => handler.Handle(It.IsAny<IGetArgumentAssociationsInvalidatorQuery>())).Returns(invalidatorMock.Object);
-
         Target(Mock.Of<IInvalidateArgumentAssociationsCommand>());
 
-        invalidatorMock.Verify(static (invalidator) => invalidator.Invalidate(), Times.Once);
+        Fixture.StateSetterMock.Verify(static (handler) => handler.Handle(It.IsAny<ISetBinaryStateCommand>()), Times.Once());
     }
 
     private void Target(
