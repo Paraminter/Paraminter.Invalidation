@@ -3,7 +3,6 @@
 using Moq;
 
 using Paraminter.Cqs;
-using Paraminter.Cqs.Handlers;
 using Paraminter.Invalidation.Queries;
 
 internal interface IFixture<in TQuery>

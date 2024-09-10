@@ -3,7 +3,6 @@
 using Moq;
 
 using Paraminter.Cqs;
-using Paraminter.Cqs.Handlers;
 using Paraminter.Invalidation.Commands;
 
 internal interface IFixture<in TCommand>
