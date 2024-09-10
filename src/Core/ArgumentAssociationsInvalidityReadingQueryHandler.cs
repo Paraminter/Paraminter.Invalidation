@@ -1,7 +1,6 @@
 ﻿namespace Paraminter.Invalidation;
 
 using Paraminter.Cqs;
-using Paraminter.Cqs.Handlers;
 using Paraminter.Invalidation.Queries;
 
 /// <summary>Handles queries by reading the invalidity of the made associations between arguments and parameters.</summary>
