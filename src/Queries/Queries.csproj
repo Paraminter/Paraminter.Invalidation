@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <AssemblyName>Paraminter.Invalidation.Queries</AssemblyName>
+        <AssemblyName>Paraminter.Processors.Invalidation.Queries</AssemblyName>
 
-        <RootNamespace>Paraminter.Invalidation.Queries</RootNamespace>
+        <RootNamespace>Paraminter.Processors.Invalidation.Queries</RootNamespace>
         
-        <PackageId>Paraminter.Invalidation.Queries</PackageId>
-        <Description>Defines queries for Paraminter invalidators.</Description>
+        <PackageId>Paraminter.Processors.Invalidation.Queries</PackageId>
+        <Description>Defines queries for Paraminter processor-invalidation.</Description>
     </PropertyGroup>
 
     <ItemGroup>

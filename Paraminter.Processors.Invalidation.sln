@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{93BD6F75-CECC-4A34-9B6F-570B24384A87}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
+		src\Directory.Build.props = src\Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CB8C43EE-45DB-479A-B2DB-A29342B438FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commands", "src\Commands\Commands.csproj", "{FD70BFF1-33E6-4FD0-898E-2B76592CE79A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Queries", "src\Queries\Queries.csproj", "{CF926533-33EB-48C8-A24D-B79A25146039}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FD70BFF1-33E6-4FD0-898E-2B76592CE79A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD70BFF1-33E6-4FD0-898E-2B76592CE79A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD70BFF1-33E6-4FD0-898E-2B76592CE79A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD70BFF1-33E6-4FD0-898E-2B76592CE79A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF926533-33EB-48C8-A24D-B79A25146039}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF926533-33EB-48C8-A24D-B79A25146039}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF926533-33EB-48C8-A24D-B79A25146039}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF926533-33EB-48C8-A24D-B79A25146039}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FD70BFF1-33E6-4FD0-898E-2B76592CE79A} = {CB8C43EE-45DB-479A-B2DB-A29342B438FC}
+		{CF926533-33EB-48C8-A24D-B79A25146039} = {CB8C43EE-45DB-479A-B2DB-A29342B438FC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A8BF900F-8E8F-47C1-A16F-1AE237548BDF}
+	EndGlobalSection
+EndGlobal
