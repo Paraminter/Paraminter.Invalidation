@@ -1,5 +1,5 @@
-# Paraminter.Invalidation.Queries
+# Paraminter.Processors.Invalidation.Queries
 
-Defines queries for `Paraminter` invalidators.
+Defines queries for `Paraminter` processor-invalidation.
 
-See [GitHub](https://github.com/Paraminter/Paraminter.Invalidation) for more information.
+See [GitHub](https://github.com/Paraminter/Paraminter.Processors.Invalidation) for more information.

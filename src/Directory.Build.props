@@ -9,8 +9,8 @@
         
         <Owners>Paraminter</Owners>
         <Authors>ErikWe</Authors>
-        <PackageProjectUrl>https://github.com/Paraminter/Paraminter.Invalidation</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/Paraminter/Paraminter.Invalidation</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/Paraminter/Paraminter.Processors.Invalidation</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/Paraminter/Paraminter.Processors.Invalidation</RepositoryUrl>
         <PackageReadmeFile>README.nupkg.md</PackageReadmeFile>
         <PackageIcon>Logo.png</PackageIcon>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
