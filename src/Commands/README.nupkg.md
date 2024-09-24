@@ -1,5 +1,5 @@
-# Paraminter.Processors.Invalidators.Commands
+# Paraminter.Processing.Invalidators.Commands
 
-Defines commands for `Paraminter` processor-invalidation.
+Defines commands for `Paraminter` processing invalidation.
 
-See [GitHub](https://github.com/Paraminter/Paraminter.Processors.Invalidation) for more information.
+See [GitHub](https://github.com/Paraminter/Paraminter.Processing.Invalidation) for more information.
