@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <AssemblyName>Paraminter.Processors.Invalidation.Commands</AssemblyName>
+        <AssemblyName>Paraminter.Processing.Invalidation.Commands</AssemblyName>
 
-        <RootNamespace>Paraminter.Processors.Invalidation.Commands</RootNamespace>
+        <RootNamespace>Paraminter.Processing.Invalidation.Commands</RootNamespace>
         
-        <PackageId>Paraminter.Processors.Invalidation.Commands</PackageId>
-        <Description>Defines commands for Paraminter processor-invalidation.</Description>
+        <PackageId>Paraminter.Processing.Invalidation.Commands</PackageId>
+        <Description>Defines commands for Paraminter processing invalidation.</Description>
     </PropertyGroup>
 
     <ItemGroup>
