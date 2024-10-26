@@ -3,6 +3,9 @@
 using Paraminter.Cqs;
 using Paraminter.Processing.Invalidation.Commands;
 
+using System.Threading;
+using System.Threading.Tasks;
+
 /// <summary>Handles commands by setting the invalidity status.</summary>
 /// <typeparam name="TQuery">The type of the handled commands.</typeparam>
 public sealed class ProcessInvaliditySettingCommandHandler<TQuery>
@@ -19,14 +22,15 @@ public sealed class ProcessInvaliditySettingCommandHandler<TQuery>
         InvaliditySetter = invaliditySetter ?? throw new System.ArgumentNullException(nameof(invaliditySetter));
     }
 
-    void ICommandHandler<TQuery>.Handle(
-        TQuery command)
+    async Task ICommandHandler<TQuery>.Handle(
+        TQuery command,
+        CancellationToken cancellationToken)
     {
         if (command is null)
         {
             throw new System.ArgumentNullException(nameof(command));
         }
 
-        InvaliditySetter.Handle(SetProcessInvalidityCommand.Instance);
+        await InvaliditySetter.Handle(SetProcessInvalidityCommand.Instance, cancellationToken).ConfigureAwait(false);
     }
 }
