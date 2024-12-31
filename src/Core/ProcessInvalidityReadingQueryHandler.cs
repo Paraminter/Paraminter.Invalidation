@@ -1,6 +1,5 @@
 ﻿namespace Paraminter.Processing.Invalidation;
 
-using Paraminter.Cqs;
 using Paraminter.Processing.Invalidation.Queries;
 
 using System.Threading;

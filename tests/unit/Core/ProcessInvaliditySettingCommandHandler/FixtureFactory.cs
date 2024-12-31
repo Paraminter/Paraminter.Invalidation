@@ -2,7 +2,6 @@
 
 using Moq;
 
-using Paraminter.Cqs;
 using Paraminter.Processing.Invalidation.Commands;
 
 internal static class FixtureFactory
